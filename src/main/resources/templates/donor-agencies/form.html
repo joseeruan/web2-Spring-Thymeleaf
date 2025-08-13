@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${donor.id == 0} ? 'Criar Órgão Donatário' : 'Editar Órgão Donatário'"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1 th:text="${donor.id == 0} ? 'Criar Órgão Donatário' : 'Editar Órgão Donatário'"></h1>
+
+<form th:action="@{/donor-agencies}" method="post" th:object="${donor}">
+    <input type="hidden" th:field="*{id}"/>
+
+    <label for="name">Nome:</label>
+    <input type="text" th:field="*{name}" required/>
+
+    <label for="address">Endereço:</label>
+    <input type="text" th:field="*{address}"/>
+
+    <label for="phone">Telefone:</label>
+    <input type="text" th:field="*{phone}"/>
+
+    <label for="workingHours">Horário de Funcionamento:</label>
+    <input type="text" th:field="*{workingHours}"/>
+
+    <label for="description">Descrição:</label>
+    <textarea th:field="*{description}" rows="3"></textarea>
+
+    <button type="submit">Salvar</button>
+    <a th:href="@{/donor-agencies}">Cancelar</a>
+
+</form>
+<button type="button" onclick="history.back()">Voltar</button>
+</body>
+</html>

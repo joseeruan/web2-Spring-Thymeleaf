@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Início - Sistema de Bazar</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h1>Bem-vindo ao Sistema de Bazar</h1>
+<nav>
+    <ul>
+        <li><a th:href="@{/inspection-agencies}">Órgãos Fiscalizadores</a></li>
+        <li><a th:href="@{/donor-agencies}">Órgãos Donatários</a></li>
+        <li><a th:href="@{/products}">Produtos</a></li>
+        <li><a th:href="@{/batches}">Lotes</a></li>
+    </ul>
+</nav>
+</body>
+</html>

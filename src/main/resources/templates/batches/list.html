@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Lotes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<h1>Lista de Lotes</h1>
+
+<form method="get" th:action="@{/batches}">
+    <label for="inspectionAgencyFilter">Filtrar por Órgão Fiscalizador:</label>
+    <select id="inspectionAgencyFilter" name="inspectionAgencyId">
+        <option value="">Todos</option>
+        <option th:each="agency : ${inspectionAgencies}"
+                th:value="${agency.id}"
+                th:text="${agency.name}"
+                th:selected="${agency.id} == ${inspectionAgencyIdFilter}"></option>
+    </select>
+
+    <label for="donorAgencyFilter">Filtrar por Órgão Donatário:</label>
+    <select id="donorAgencyFilter" name="donorAgencyId">
+        <option value="">Todos</option>
+        <option th:each="agency : ${donorAgencies}"
+                th:value="${agency.id}"
+                th:text="${agency.name}"
+                th:selected="${agency.id} == ${donorAgencyIdFilter}"></option>
+    </select>
+
+    <button type="submit">Filtrar</button>
+    <a th:href="@{/batches}">Limpar</a>
+</form>
+
+<a th:href="@{/batches/new}">Criar Novo Lote</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Data da Entrega</th>
+        <th>Órgão Fiscalizador</th>
+        <th>Órgão Donatário</th>
+        <th>Produtos</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="batch : ${batches}">
+        <td th:text="${batch.id}">ID</td>
+        <td th:text="${#temporals.format(batch.deliveryDate, 'dd/MM/yyyy')}">Data</td>
+        <td th:text="${batch.inspectionAgency.name}">Órgão Fiscalizador</td>
+        <td th:text="${batch.donorAgency.name}">Órgão Donatário</td>
+        <td>
+            <ul>
+                <li th:each="product : ${batch.products}" th:text="${product.name}">Produto</li>
+            </ul>
+        </td>
+        <td>
+            <a th:href="@{'/batches/edit/' + ${batch.id}}">Editar</a> |
+            <a th:href="@{'/batches/delete/' + ${batch.id}}" onclick="return confirm('Confirma a exclusão?')">Excluir</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<button type="button" onclick="history.back()">Voltar</button>
+
+</body>
+</html>

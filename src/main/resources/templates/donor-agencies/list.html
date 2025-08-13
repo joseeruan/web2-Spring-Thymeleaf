@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Órgãos Donatários</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Órgãos Donatários</h1>
+
+<a th:href="@{/donor-agencies/new}">Adicionar Novo Órgão Donatário</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Endereço</th>
+        <th>Telefone</th>
+        <th>Horário de Funcionamento</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="donor : ${donors}">
+        <td th:text="${donor.id}"></td>
+        <td th:text="${donor.name}"></td>
+        <td th:text="${donor.address}"></td>
+        <td th:text="${donor.phone}"></td>
+        <td th:text="${donor.workingHours}"></td>
+        <td th:text="${donor.description}"></td>
+        <td>
+            <a th:href="@{'/donor-agencies/edit/' + ${donor.id}}">Editar</a> |
+            <a th:href="@{'/donor-agencies/delete/' + ${donor.id}}" onclick="return confirm('Tem certeza?');">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+<button type="button" onclick="history.back()">Voltar</button>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${batch.id == 0} ? 'Criar Lote' : 'Editar Lote'">Formulário Lote</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1 th:text="${batch.id == 0} ? 'Criar Lote' : 'Editar Lote'">Formulário Lote</h1>
+
+<form th:action="@{/batches}" method="post" th:object="${batch}">
+    <input type="hidden" th:field="*{id}"/>
+
+    <label for="deliveryDate">Data da Entrega:</label>
+    <input type="date" id="deliveryDate" th:field="*{deliveryDate}" required/>
+
+    <label for="inspectionAgency">Órgão Fiscalizador:</label>
+    <select id="inspectionAgency" th:field="*{inspectionAgency.id}">
+        <option value="">-- Selecione um Órgão Fiscalizador --</option>
+        <option th:each="agency : ${inspectionAgencies}"
+                th:value="${agency.id}"
+                th:text="${agency.name}"></option>
+    </select>
+
+    <label for="donorAgency">Órgão Donatário:</label>
+    <select id="donorAgency" th:field="*{donorAgency.id}">
+        <option value="">-- Selecione um Órgão Donatário --</option>
+        <option th:each="agency : ${donorAgencies}"
+                th:value="${agency.id}"
+                th:text="${agency.name}"></option>
+    </select>
+
+    <label for="notes">Observações:</label>
+    <textarea id="notes" th:field="*{notes}" rows="4"></textarea>
+
+    <label>Produtos:</label>
+    <div class="checkbox-list">
+        <div th:each="product : ${products}">
+            <input type="checkbox" name="productCodes" th:value="${product.code}"
+                   th:checked="${batch.products != null and #lists.contains(batch.products, product)}"/>
+            <label th:text="${product.name}"></label>
+        </div>
+    </div>
+
+    <button type="submit">Salvar</button>
+    <a th:href="@{/batches}">Cancelar</a>
+
+</form>
+<button type="button" onclick="history.back()">Voltar</button>
+</body>
+</html>

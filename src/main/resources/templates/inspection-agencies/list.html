@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Órgãos Fiscalizadores</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Órgãos Fiscalizadores</h1>
+
+<a th:href="@{/inspection-agencies/new}">Adicionar Novo Órgão Fiscalizador</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="agency : ${agencies}">
+        <td th:text="${agency.id}"></td>
+        <td th:text="${agency.name}"></td>
+        <td th:text="${agency.description}"></td>
+        <td>
+            <a th:href="@{'/inspection-agencies/edit/' + ${agency.id}}">Editar</a> |
+            <a th:href="@{'/inspection-agencies/delete/' + ${agency.id}}" onclick="return confirm('Tem certeza?');">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+    <button type="button" onclick="history.back()">Voltar</button>
+</body>
+</html>

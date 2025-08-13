@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${agency.id == 0} ? 'Criar Órgão Fiscalizador' : 'Editar Órgão Fiscalizador'"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1 th:text="${agency.id == 0} ? 'Criar Órgão Fiscalizador' : 'Editar Órgão Fiscalizador'"></h1>
+
+<form th:action="@{/inspection-agencies}" method="post" th:object="${agency}">
+    <input type="hidden" th:field="*{id}"/>
+
+    <label for="name">Nome:</label>
+    <input type="text" th:field="*{name}" required/>
+
+    <label for="description">Descrição:</label>
+    <textarea th:field="*{description}" rows="3"></textarea>
+
+    <button type="submit">Salvar</button>
+    <a th:href="@{/inspection-agencies}">Cancelar</a>
+</form>
+
+<button type="button" onclick="history.back()">Voltar</button>
+</body>
+</html>

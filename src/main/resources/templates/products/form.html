@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${product.code == 0} ? 'Criar Produtot' : 'Editar Produto'"></title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1 th:text="${product.code == 0} ? 'Criar Produto' : 'Editar Produto'"></h1>
+
+<form th:action="@{/products}" method="post" th:object="${product}">
+    <input type="hidden" th:field="*{code}"/>
+
+    <label for="name">Nome:</label>
+    <input type="text" th:field="*{name}" required/>
+
+    <label for="description">Descrição:</label>
+    <textarea th:field="*{description}" rows="3"></textarea>
+
+    <button type="submit">Salvar</button>
+    <a th:href="@{/products}">Cancelar</a>
+    <button type="button" onclick="history.back()">Voltar</button>
+</form>
+
+</body>
+</html>
